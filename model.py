@@ -44,5 +44,5 @@ class Venda:
 
 
 class Fornecedor:
-    def __init__(self, nome: str, cnpj: str, fone: str, categoria: Categoria) -> None:
+    def __init__(self, nome: str, cnpj: str, fone: str, categoria: Categoria):
         self.nome, self.cnpj, self.fone, self.categoria = nome, cnpj, fone, categoria
