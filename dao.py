@@ -97,6 +97,21 @@ class DaoFornecedor(DaoBase):
         super().__init__("Fornecedor", campos, "banco.db")
 
 
+class DaoFuncionario(DaoBase):
+    def __init__(self):
+        campos = {
+            "id": "INTEGER PRIMARY KEY AUTOINCREMENT",
+            "nome": "TEXT",
+            "fone": "TEXT",
+            "cpf": "TEXT",
+            "salario": "TEXT"        
+            }
+        super().__init__("Funcionario", campos, "banco.db")
+
+
+
+
+
 
 if __name__ == "__main__":
-    a=DaoFornecedor()
+    a=DaoFuncionario()

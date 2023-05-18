@@ -12,7 +12,13 @@ def menu():
         "6 - exibir fornecedor\n"
         "7 - editar fornecedor\n"
         "8 - excluir fornecedor\n"
+        "------------------\n"
+        "9 - add funcionario\n"
+        "10 - exibir funcionario\n"
+        "11 - editar funcionario\n"
+        "12 - excluir funcionario\n"
         "----========----\n"
+
         )
 
     op = input("Escolha um numero: ")
@@ -20,7 +26,7 @@ def menu():
     if op == "1":
         # add cliente
         cpf = input("cpf: ")
-        if ControllerCliente.verifica_se_existe_cliente(cpf, "cpf", "Cliente"):
+        if ControllerCliente.verifica_se_existe_cliente(cpf, "cpf"):
             print("Cliente ja possui cadastro")
         else:
             nome = input("nome: ")
@@ -81,6 +87,53 @@ def menu():
         
         else:
             print("Fornecedor nao encontrado na base de dados")
+    
+    elif op == "8":
+        # excluir fornecedor
+        print(ControllerFornecedor.exibe_fornecedores())
+        id = input("Informe o id: ")
+
+        if ControllerFornecedor.verifica_se_existe_fornecedor(id, "id"):
+            print(ControllerFornecedor.excluir(id))
+    
+    elif op == "9":
+        # add funcionario
+        cpf = input("cpf: ")
+        if ControllerFuncionario.verifica_se_existe(cpf, "cpf"):
+            print("Funcionario ja possui cadastro")
+        else:
+            nome = input("nome: ")
+            fone = input("fone: ")
+            salario = input("salario: ")
+            print(ControllerFuncionario.add(nome, fone, cpf, salario))
+
+    elif op == "10":
+        # exibir funcionario
+        print(ControllerFuncionario.exibir())
+
+    elif op == "11":
+        # edita cliente
+        print(ControllerFuncionario.exibir())
+        id = input("Informe o id: ")
+
+        if ControllerFuncionario.verifica_se_existe(id, "id"):
+            nome = input("nome ou enter: ")
+            cpf = input("cpf ou enter: ")
+            fone = input("fone ou enter: ")
+            salario = input("salario ou enter: ")
+            print("==================================")
+            print(ControllerFuncionario.edit(id, nome, fone, cpf, salario))
+        
+        else:
+            print("Funcionario nao encontrado na base de dados")
+
+    elif op == "12":
+        # exclui funcionario
+        print(ControllerFuncionario.exibir())
+        id = input("Informe o id: ")
+
+        if ControllerFuncionario.verifica_se_existe(id, "id"):
+            print(ControllerFuncionario.excluir(id))
 
 if __name__ == "__main__":
     menu()
