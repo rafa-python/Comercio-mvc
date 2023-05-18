@@ -20,6 +20,7 @@ class DaoBase:
     def conecta_banco(cls, banco):
         conn = sqlite3.connect(banco)
         cursor = conn.cursor()
+        
         return cursor, conn
     
     @classmethod
@@ -46,6 +47,32 @@ class DaoBase:
         conn.close()
         
         return True
+    
+    @classmethod
+    def excluir(cls, valor_campo, campo, tabela):
+        cursor, conn = DaoBase.conecta_banco(r"D:\Comercio\banco.db")
+        cursor.execute(f"DELETE FROM {tabela} WHERE {campo} = ?", (valor_campo,))
+        conn.commit()
+        conn.close()
+        
+        return True
+    
+    @classmethod
+    def verifica_se_existe(cls, dado, campo, tabela):
+        cursor, conn = DaoBase.conecta_banco(r"D:\Comercio\banco.db")
+        query = f"SELECT {campo} FROM {tabela} WHERE {campo} = ?"
+        cursor.execute(query, (dado,))
+        resposta = cursor.fetchone()
+        conn.close()
+        
+        return resposta
+    
+    @classmethod
+    def retorna_dados(cls, tabela):
+        cursor, conn = DaoBase.conecta_banco(r"D:\Comercio\banco.db")
+        dados = list(cursor.execute(f"SELECT * FROM {tabela};"))
+        conn.close()
+        return dados
 
 
 class DaoCliente(DaoBase):
