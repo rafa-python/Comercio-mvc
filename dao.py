@@ -85,41 +85,18 @@ class DaoCliente(DaoBase):
         }
         super().__init__("Cliente", campos, "banco.db")
 
-"""
-class DaoCategoria(DaoBase):
-    @classmethod
-    def add(cls, categoria):
-        with open("categoria.txt", "a") as arq:
-            arq.writelines(categoria)
-            arq.writelines("\n")
 
-    @classmethod
-    def ler(cls):
-        pass
+class DaoFornecedor(DaoBase):
+    def __init__(self):
+        campos = {
+            "id": "INTEGER PRIMARY KEY AUTOINCREMENT",
+            "nome": "TEXT",
+            "cnpj": "TEXT",
+            "fone": "TEXT"
+        }
+        super().__init__("Fornecedor", campos, "banco.db")
 
-
-class DaoVenda:
-    @classmethod
-    def salvar(cls, venda: Venda):
-        with open("venda.txt", "a") as arq:
-            arq.writelines(
-                f{venda.itensVendidos.nome} -- {venda.itensVendidos.preco} -- 
-            {venda.itensVendidos.categoria} -- {venda.vendedor} -- {venda.comprador}
-            {venda.quantidadeVendida} -- {venda.data}
-            )
-            arq.writelines("\n")
-
-    @classmethod
-    def ler(cls):
-        with open("venda.txt", "r") as arq:
-            cls.venda = arq.readlines()
-
-        cls.venda = list(map(lambda x: x.replace("\n", ""), cls.venda))
-        vend = [Categoria(i) for i in cls.veda]
-        return vend
-        
-"""
 
 
 if __name__ == "__main__":
-    a=DaoCliente()
+    a=DaoFornecedor()
