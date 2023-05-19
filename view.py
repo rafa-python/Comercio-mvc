@@ -17,6 +17,9 @@ def menu():
         "10 - exibir funcionario\n"
         "11 - editar funcionario\n"
         "12 - excluir funcionario\n"
+        "------------------\n"
+        "13 - add produto\n"
+        "------------------\n"
         "----========----\n"
 
         )
@@ -134,6 +137,29 @@ def menu():
 
         if ControllerFuncionario.verifica_se_existe(id, "id"):
             print(ControllerFuncionario.excluir(id))
+
+    elif op == "13":
+        # add produto
+        nome = input("nome: ")
+        if ControllerProduto.verifica_se_existe(nome, "nome"):
+            print("Produto ja cadastrado.")
+        
+        else:
+            preco = float(input("preco: "))
+            categoria = input("categoria: ")
+            quantidade = int(input("quantidade: "))
+            print(ControllerFornecedor.exibe_fornecedores())
+            id_fornecedor = input("informe o id do fornecedor: ")
+
+            if ControllerFornecedor.verifica_se_existe_fornecedor(id_fornecedor, "id"):
+                nome_fornecedor = ControllerProduto.nome_fornecedor(id_fornecedor)
+                print(ControllerProduto.add(nome, preco, categoria, quantidade, nome_fornecedor, id_fornecedor))
+            
+            else:
+                print("Fornecedor nao encontrado.")
+            
+
+
 
 if __name__ == "__main__":
     menu()
