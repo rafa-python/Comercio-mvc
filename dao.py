@@ -132,7 +132,22 @@ class DaoProduto(DaoBase):
         super().__init__("Produto", campos, "banco.db")
     
 
-
+class DaoVenda(DaoBase):
+    def __init__(self):
+        campos = {
+            "id": "INTEGER PRIMARY KEY AUTOINCREMENT",
+            "Data": "DATE",
+            "produto": "TEXT",
+            "preco": "REAL",
+            "quantidade": "INTEGER",
+            "cliente": "TEXT",
+            "vendedor": "TEXT",
+            "id_cliente": "INTEGER",
+            "id_vendedor": "INTEGER",
+            "foreign key(id_cliente)": "REFERENCES Cliente(id) ON DELETE SET NULL",
+            "foreign key(id_vendedor)": "REFERENCES Funcionario(id) ON DELETE SET NULL"        
+            }
+        super().__init__("Vendas", campos, "banco.db")
 
 if __name__ == "__main__":
-    a=DaoProduto()
+    a=DaoVenda()
