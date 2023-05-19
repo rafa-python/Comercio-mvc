@@ -24,7 +24,7 @@ class Produto:
         preco: float,
         categoria: str,
         quantidade: int,
-        fornecedor: Fornecedor,
+        fornecedor: str,
     ):
         self.nome, self.preco, self.categoria, self.quantidade, self.fornecedor = (
             nome,
