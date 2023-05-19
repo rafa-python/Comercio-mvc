@@ -1,4 +1,9 @@
-from controller import *
+from controller_cliente import ControllerCliente
+from controller_funcionario import ControllerFuncionario
+from controller_fornecedor import ControllerFornecedor
+from controller_produto import ControllerProduto
+from controller_vendas import DaoVenda
+
 
 def menu_geral():
     print(
@@ -24,7 +29,6 @@ def menu_geral():
         "16 - excluir produto\n"
         "------------------\n"
         "----========----\n"
-
         )
 
     op = input("Escolha um numero: ")
