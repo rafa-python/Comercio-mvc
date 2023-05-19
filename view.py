@@ -1,6 +1,6 @@
 from controller import *
 
-def menu():
+def menu_geral():
     print(
         "----==Menu==----\n"
         "1 - add cliente\n"
@@ -19,6 +19,9 @@ def menu():
         "12 - excluir funcionario\n"
         "------------------\n"
         "13 - add produto\n"
+        "14 - exibir produto\n"
+        "15 - editar produto\n"
+        "16 - excluir produto\n"
         "------------------\n"
         "----========----\n"
 
@@ -158,9 +161,46 @@ def menu():
             else:
                 print("Fornecedor nao encontrado.")
             
+    elif op == "14":
+        print(ControllerProduto.exibe())
+    
+    elif op == "15":
+        # editar produto
+        print(ControllerProduto.exibe())
+        id = input("id: ")
 
+        if ControllerProduto.verifica_se_existe(id, "id"):
+            nome = input("nome ou enter: ")
+            preco = input("preco ou enter: ")
+            categoria = input("categoria ou enter: ")
+            quantidade = input("quantidade ou enter: ")
+            print(ControllerFornecedor.exibe_fornecedores())
+            id_fornecedor = input("informe o id do fornecedor ou enter: ")
+
+            if ControllerFornecedor.verifica_se_existe_fornecedor(id_fornecedor, "id"):
+                nome_fornecedor = ControllerProduto.nome_fornecedor(id_fornecedor)
+                print(ControllerProduto.edit(id, nome, preco, categoria, quantidade, nome_fornecedor, id_fornecedor))
+            
+            elif id_fornecedor == "":
+                nome_fornecedor = ""
+                print(ControllerProduto.edit(id, nome, preco, categoria, quantidade, nome_fornecedor, id_fornecedor))
+
+            else:
+                print("Fornecedor nao encontrado.")
+
+        else:
+            print("Produto nao encontrado.")
+
+    elif op == "16":
+        # excluir produto
+        print(ControllerProduto.exibe())
+        id = input("id: ")
+        if ControllerProduto.verifica_se_existe(id, "id"):
+            print(ControllerProduto.excluir(id))
+        else:
+            print("Produto nao encontrado na base de dados.")
 
 
 if __name__ == "__main__":
-    menu()
+    menu_geral()
 
