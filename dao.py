@@ -73,6 +73,14 @@ class DaoBase:
         dados = list(cursor.execute(f"SELECT * FROM {tabela};"))
         conn.close()
         return dados
+    
+    @classmethod
+    def retorna_dado(cls, id, tabela):
+        cursor, conn = DaoBase.conecta_banco(r"D:\Comercio\banco.db")
+        dados = list(cursor.execute(f"SELECT * FROM {tabela} WHERE ID = ?;", (id,)))
+        conn.close()
+        return dados
+
 
 
 class DaoCliente(DaoBase):
@@ -109,9 +117,22 @@ class DaoFuncionario(DaoBase):
         super().__init__("Funcionario", campos, "banco.db")
 
 
-
+class DaoProduto(DaoBase):
+    def __init__(self):
+        campos = {
+            "id": "INTEGER PRIMARY KEY AUTOINCREMENT",
+            "nome": "TEXT",
+            "preco": "REAL",
+            "categoria": "TEXT",
+            "quantidade": "INTEGER",
+            "fornecedor": "TEXT",
+            "id_fornecedor": "INTEGER",
+            "foreign key(id_fornecedor)": "REFERENCES Fornecedor(id) ON DELETE SET NULL"        
+            }
+        super().__init__("Produto", campos, "banco.db")
+    
 
 
 
 if __name__ == "__main__":
-    a=DaoFuncionario()
+    a=DaoProduto()
