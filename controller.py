@@ -11,9 +11,9 @@ class ControllerCliente:
             resposta = "Cliente adicionado com sucesso"
         else:
             resposta = "Infelizmente ocorreu um erro no cadastro"
-        
+
         return resposta
-        
+
     @classmethod
     def exibe_clientes(cls):
         print("====================================================")
@@ -29,29 +29,28 @@ class ControllerCliente:
         if nome != "":
             DaoCliente.edit("Cliente", id, nome=nome)
             resposta += "Nome atualizado\n"
-        
+
         if fone != "":
             DaoCliente.edit("Cliente", id, fone=fone)
             resposta += "Fone atualizado\n"
-        
+
         if cpf != "":
             DaoCliente.edit("Cliente", id, cpf=cpf)
             resposta += "CPF atualizado"
-        
+
         if cpf == "" and fone == "" and nome == "":
             resposta = "Nada para atualizar"
-        
+
         return resposta
 
     @classmethod
     def excluir_cliente(cls, id):
         DaoCliente.excluir(id, "id", "Cliente")
-        
-        return 'Cliente excluido com sucesso'
+
+        return "Cliente excluido com sucesso"
 
     @classmethod
     def verifica_se_existe_cliente(cls, dado, campo):
-        
         return DaoCliente.verifica_se_existe(dado, campo, "Cliente")
 
 
@@ -64,7 +63,7 @@ class ControllerFornecedor:
         [tabela.add_row(linha) for linha in dados]
 
         return tabela
-    
+
     @classmethod
     def add_fornecedor(cls, nome, cnpj, fone):
         resposta = ""
@@ -72,51 +71,53 @@ class ControllerFornecedor:
             resposta = "Fornecedor adicionado com sucesso"
         else:
             resposta = "Infelizmente ocorreu um erro no cadastro"
-        
+
         return resposta
-    
+
     @classmethod
     def verifica_se_existe_fornecedor(cls, dado, campo):
         return DaoFornecedor.verifica_se_existe(dado, campo, "Fornecedor")
 
-    @classmethod 
+    @classmethod
     def editar_fornecedor(cls, id, nome, cnpj, fone):
         resposta = ""
         if nome != "":
             DaoFornecedor.edit("Fornecedor", id, nome=nome)
             resposta += "Nome atualizado\n"
-        
+
         if fone != "":
             DaoFornecedor.edit("Fornecedor", id, fone=fone)
             resposta += "Fone atualizado\n"
-        
+
         if cnpj != "":
             DaoFornecedor.edit("Fornecedor", id, cnpj=cnpj)
             resposta += "CNPJ atualizado"
-        
+
         if cnpj == "" and fone == "" and nome == "":
             resposta = "Nada para atualizar"
-        
+
         return resposta
-    
+
     @classmethod
     def excluir(cls, id):
         DaoFornecedor.excluir(id, "id", "Fornecedor")
-        
-        return 'Fornecedor excluido com sucesso'
+
+        return "Fornecedor excluido com sucesso"
 
 
 class ControllerFuncionario:
     @classmethod
     def add(cls, nome: str, fone: str, cpf: str, salario: str):
         resposta = ""
-        if DaoFuncionario.add("Funcionario", nome=nome, fone=fone, cpf=cpf, salario=salario):
+        if DaoFuncionario.add(
+            "Funcionario", nome=nome, fone=fone, cpf=cpf, salario=salario
+        ):
             resposta = "Funcionario adicionado com sucesso"
         else:
             resposta = "Infelizmente ocorreu um erro no cadastro"
-        
+
         return resposta
-    
+
     @classmethod
     def exibir(cls):
         print("====================================================")
@@ -125,34 +126,33 @@ class ControllerFuncionario:
         [tabela.add_row(linha) for linha in dados]
 
         return tabela
-    
+
     @classmethod
     def verifica_se_existe(cls, dado, campo):
-        
         return DaoFuncionario.verifica_se_existe(dado, campo, "Funcionario")
-    
+
     @classmethod
     def edit(cls, id, nome, fone, cpf, salario):
         resposta = ""
         if nome != "":
             DaoFuncionario.edit("Funcionario", id, nome=nome)
             resposta += "Nome atualizado\n"
-        
+
         if fone != "":
             DaoFuncionario.edit("Funcionario", id, fone=fone)
             resposta += "Fone atualizado\n"
-        
+
         if cpf != "":
             DaoFuncionario.edit("Funcionario", id, cpf=cpf)
             resposta += "CPF atualizado"
-        
+
         if salario != "":
             DaoFuncionario.edit("Funcionario", id, salario=salario)
             resposta += "Salario atualizado"
-        
+
         if salario == "" and fone == "" and nome == "" and cpf == "":
             resposta = "Nada para atualizar"
-        
+
         return resposta
 
     @classmethod
@@ -162,7 +162,51 @@ class ControllerFuncionario:
         return "Funcionario excluido."
 
 
+class ControllerProduto:
+    @classmethod
+    def exibe(cls):
+        print("====================================================")
+        tabela = PrettyTable(
+            [
+                "ID",
+                "NOME",
+                "PRECO",
+                "CATEGORIA",
+                "QUANTIDADE",
+                "FORNECEDOR",
+                "ID FORNECEDOR",
+            ]
+        )
+        dados = DaoProduto.retorna_dados("Produto")
+        [tabela.add_row(linha) for linha in dados]
 
+        return tabela
+
+    @classmethod
+    def verifica_se_existe(cls, dado, campo):
+        return DaoProduto.verifica_se_existe(dado, campo, "Produto")
+    
+    @classmethod
+    def nome_fornecedor(cls, id):
+        return DaoFornecedor.retorna_dado(id, "Fornecedor")[0][1]
+
+    @classmethod
+    def add(cls, nome, preco, categoria, quantidade, fornecedor, id_fornecedor):
+        resposta = ""
+        if DaoProduto.add(
+            "Produto",
+            nome=nome,
+            preco=preco,
+            categoria=categoria,
+            quantidade=quantidade,
+            fornecedor=fornecedor,
+            id_fornecedor=id_fornecedor,
+        ):
+            resposta = "Produto adicionado com sucesso"
+        else:
+            resposta = "Infelizmente ocorreu um erro no cadastro"
+
+        return resposta
 
 
 if __name__ == "__main__":
