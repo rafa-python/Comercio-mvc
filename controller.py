@@ -207,6 +207,45 @@ class ControllerProduto:
             resposta = "Infelizmente ocorreu um erro no cadastro"
 
         return resposta
+    
+    @classmethod
+    def edit(cls, id, nome, preco, categoria, quantidade, fornecedor, id_fornecedor):
+        resposta = ""
+        if nome != "":
+            DaoProduto.edit("Produto", id, nome=nome)
+            resposta += "Nome atualizado\n"
+
+        if preco != "":
+            DaoProduto.edit("Produto", id, preco=preco)
+            resposta += "Preço atualizado\n"
+
+        if categoria != "":
+            DaoProduto.edit("Produto", id, categoria=categoria)
+            resposta += "Categoria atualizado\n"
+
+        if quantidade != "":
+            DaoProduto.edit("Produto", id, quantidade=quantidade)
+            resposta += "Quantidade atualizado\n"
+        
+        if fornecedor != "":
+            DaoProduto.edit("Produto", id, fornecedor=fornecedor)
+            resposta += "Fornecedor atualizado\n"
+        
+        if id_fornecedor != "":
+            DaoProduto.edit("Produto", id, id_fornecedor=id_fornecedor)
+            resposta += "Id fornecedor atualizado\n"
+
+        if nome == "" and preco == "" and categoria == "" and quantidade == "" and fornecedor == "" and id_fornecedor == "":
+            resposta = "Nada para atualizar"
+
+        return resposta
+    
+    @classmethod
+    def excluir(cls, id):
+        DaoProduto.excluir(id, "id", "Produto")
+
+        return "Produto excluido."
+
 
 
 if __name__ == "__main__":
