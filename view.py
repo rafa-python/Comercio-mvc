@@ -1,55 +1,36 @@
-from controller_cliente import ControllerCliente
-from controller_funcionario import ControllerFuncionario
-from controller_fornecedor import ControllerFornecedor
-from controller_produto import ControllerProduto
-from controller_vendas import DaoVenda
+from controller.controller_cliente import ControllerCliente
+from controller.controller_funcionario import ControllerFuncionario
+from controller.controller_fornecedor import ControllerFornecedor
+from controller.controller_produto import ControllerProduto
+from controller.controller_vendas import DaoVenda
+from view_cliente import menu_cliente
+from view_fornecedores import menu_fornecedor
 
 
 def menu_geral():
     print(
         "----==Menu==----\n"
-        "1 - add cliente\n"
-        "2 - exibir clientes\n"
-        "3 - editar cliente\n"
-        "4 - excluir cliente\n"
-        "------------------\n"
-        "5 - add fornecedor\n"
-        "6 - exibir fornecedor\n"
-        "7 - editar fornecedor\n"
-        "8 - excluir fornecedor\n"
-        "------------------\n"
-        "9 - add funcionario\n"
-        "10 - exibir funcionario\n"
-        "11 - editar funcionario\n"
-        "12 - excluir funcionario\n"
-        "------------------\n"
-        "13 - add produto\n"
-        "14 - exibir produto\n"
-        "15 - editar produto\n"
-        "16 - excluir produto\n"
-        "------------------\n"
+        "1 - cliente\n"
+        "2 - fornecedores\n"
+        "3 - funcionario\n"
+        "4 - produto\n"
+        "5 - vendas\n"
+        "6 - sair do programa\n"
         "----========----\n"
         )
 
     op = input("Escolha um numero: ")
 
     if op == "1":
-        # add cliente
-        cpf = input("cpf: ")
-        if ControllerCliente.verifica_se_existe_cliente(cpf, "cpf"):
-            print("Cliente ja possui cadastro")
-        else:
-            nome = input("nome: ")
-            fone = input("fone: ")
-            print(ControllerCliente.add(nome, fone, cpf))
-        # add cliente - fim
-    
+        # cliente
+        menu_cliente()
+            
     elif op == "2":
-        # exibe clientes
-        print(ControllerCliente.exibe_clientes())
+        # fornecedores
+        menu_fornecedor()
             
     elif op == "3":
-        # edita cliente
+        # funcionario
         print(ControllerCliente.exibe_clientes())
         id = input("Informe o id: ")
 
