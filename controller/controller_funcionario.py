@@ -1,6 +1,7 @@
 from prettytable import PrettyTable
 from dao import DaoFuncionario, DaoCliente
 
+
 class ControllerFuncionario:
     @classmethod
     def add(cls, nome: str, fone: str, cpf: str, salario: str):
@@ -56,3 +57,7 @@ class ControllerFuncionario:
         DaoFuncionario.excluir(id, "id", "Funcionario")
 
         return "Funcionario excluido."
+    
+    @classmethod
+    def retorna_dado(cls, id):
+        return DaoFuncionario.retorna_dado(id, "Funcionario")[0][1]

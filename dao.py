@@ -20,9 +20,9 @@ class DaoBase:
     def conecta_banco(cls, banco):
         conn = sqlite3.connect(banco)
         cursor = conn.cursor()
-        
+
         return cursor, conn
-    
+
     @classmethod
     def add(cls, nome_tabela, **kwargs):
         cursor, conn = DaoBase.conecta_banco(r"D:\Comercio\banco.db")
@@ -35,7 +35,7 @@ class DaoBase:
         conn.close()
 
         return True
-    
+
     @classmethod
     def edit(cls, nome_tabela, id, **kwargs):
         cursor, conn = DaoBase.conecta_banco(r"D:\Comercio\banco.db")
@@ -45,18 +45,18 @@ class DaoBase:
         cursor.execute(query, valores)
         conn.commit()
         conn.close()
-        
+
         return True
-    
+
     @classmethod
     def excluir(cls, valor_campo, campo, tabela):
         cursor, conn = DaoBase.conecta_banco(r"D:\Comercio\banco.db")
         cursor.execute(f"DELETE FROM {tabela} WHERE {campo} = ?", (valor_campo,))
         conn.commit()
         conn.close()
-        
+
         return True
-    
+
     @classmethod
     def verifica_se_existe(cls, dado, campo, tabela):
         cursor, conn = DaoBase.conecta_banco(r"D:\Comercio\banco.db")
@@ -64,16 +64,16 @@ class DaoBase:
         cursor.execute(query, (dado,))
         resposta = cursor.fetchone()
         conn.close()
-        
+
         return resposta
-    
+
     @classmethod
     def retorna_dados(cls, tabela):
         cursor, conn = DaoBase.conecta_banco(r"D:\Comercio\banco.db")
         dados = list(cursor.execute(f"SELECT * FROM {tabela};"))
         conn.close()
         return dados
-    
+
     @classmethod
     def retorna_dado(cls, id, tabela):
         cursor, conn = DaoBase.conecta_banco(r"D:\Comercio\banco.db")
@@ -82,14 +82,13 @@ class DaoBase:
         return dados
 
 
-
 class DaoCliente(DaoBase):
     def __init__(self):
         campos = {
             "id": "INTEGER PRIMARY KEY AUTOINCREMENT",
             "nome": "TEXT",
             "fone": "TEXT",
-            "cpf": "TEXT"
+            "cpf": "TEXT",
         }
         super().__init__("Cliente", campos, "banco.db")
 
@@ -100,7 +99,7 @@ class DaoFornecedor(DaoBase):
             "id": "INTEGER PRIMARY KEY AUTOINCREMENT",
             "nome": "TEXT",
             "cnpj": "TEXT",
-            "fone": "TEXT"
+            "fone": "TEXT",
         }
         super().__init__("Fornecedor", campos, "banco.db")
 
@@ -112,8 +111,8 @@ class DaoFuncionario(DaoBase):
             "nome": "TEXT",
             "fone": "TEXT",
             "cpf": "TEXT",
-            "salario": "TEXT"        
-            }
+            "salario": "TEXT",
+        }
         super().__init__("Funcionario", campos, "banco.db")
 
 
@@ -127,16 +126,15 @@ class DaoProduto(DaoBase):
             "quantidade": "INTEGER",
             "fornecedor": "TEXT",
             "id_fornecedor": "INTEGER",
-            "foreign key(id_fornecedor)": "REFERENCES Fornecedor(id) ON DELETE SET NULL"        
-            }
+            "foreign key(id_fornecedor)": "REFERENCES Fornecedor(id) ON DELETE SET NULL",
+        }
         super().__init__("Produto", campos, "banco.db")
-    
+
 
 class DaoVenda(DaoBase):
     def __init__(self):
         campos = {
             "id": "INTEGER PRIMARY KEY AUTOINCREMENT",
-            "Data": "DATE",
             "produto": "TEXT",
             "preco": "REAL",
             "quantidade": "INTEGER",
@@ -144,10 +142,12 @@ class DaoVenda(DaoBase):
             "vendedor": "TEXT",
             "id_cliente": "INTEGER",
             "id_vendedor": "INTEGER",
+            "data": "DATE",
             "foreign key(id_cliente)": "REFERENCES Cliente(id) ON DELETE SET NULL",
-            "foreign key(id_vendedor)": "REFERENCES Funcionario(id) ON DELETE SET NULL"        
-            }
+            "foreign key(id_vendedor)": "REFERENCES Funcionario(id) ON DELETE SET NULL",
+        }
         super().__init__("Vendas", campos, "banco.db")
 
+
 if __name__ == "__main__":
-    a=DaoVenda()
+    a = DaoVenda()

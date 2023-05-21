@@ -51,3 +51,7 @@ class ControllerCliente:
     @classmethod
     def verifica_se_existe_cliente(cls, dado, campo):
         return DaoCliente.verifica_se_existe(dado, campo, "Cliente")
+
+    @classmethod
+    def retorna_dado(cls, id):
+        return DaoCliente.retorna_dado(id, "Cliente")[0][1]

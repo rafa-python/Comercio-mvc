@@ -1,5 +1,6 @@
 from controller.controller_funcionario import ControllerFuncionario
 
+
 def menu_funcionario():
     print(
         "----==funcionario==----\n"
@@ -10,8 +11,8 @@ def menu_funcionario():
         "5 - retornar ao menu principal\n"
         "6 - sair do programa\n"
         "----==============----\n"
-        )
-    
+    )
+
     op = input("Escolha um numero: ")
 
     if op == "1":
@@ -41,7 +42,7 @@ def menu_funcionario():
             salario = input("salario ou enter: ")
             print("==================================")
             print(ControllerFuncionario.edit(id, nome, fone, cpf, salario))
-        
+
         else:
             print("Funcionario nao encontrado na base de dados")
 
@@ -55,11 +56,12 @@ def menu_funcionario():
 
     elif op == "5":
         from view import menu_geral
+
         menu_geral()
-    
+
     elif op == "6":
         exit()
-    
+
     else:
         print("Valor invalido, retornando ao menu funcionarios")
         menu_funcionario()
